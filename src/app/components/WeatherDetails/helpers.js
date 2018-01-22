@@ -1,5 +1,5 @@
 export const stubbedState = {
-  weather: {
+  currentData: {
     icon_url: 'http://icons-ak.wxug.com/i/c/k/partlycloudy.gif',
     weather: 'Rain',
     display_location: {
