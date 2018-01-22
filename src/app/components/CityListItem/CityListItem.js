@@ -12,12 +12,12 @@ class CityListItem extends Component {
     const state = location.split(', ')[1]
 
     return (
-      <View style={styles.containerx}>
+      <View style={styles.cityListContainer}>
         <TouchableOpacity
           style={styles.listItem}
           onPress={() => navigate('Weather', { city, state })}
         >
-          <Text style={styles.cityName}>{location}</Text>
+          <Text style={styles.cityName}>{city}</Text>
         </TouchableOpacity>
       </View>
     )

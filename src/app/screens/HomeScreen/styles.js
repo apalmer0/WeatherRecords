@@ -2,6 +2,6 @@ import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
   container: {
-    paddingTop: 10,
+    backgroundColor: '#78BF7E',
   },
 })
