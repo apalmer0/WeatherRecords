@@ -19,9 +19,9 @@ class WeatherDetails extends Component {
     super(props)
     const defaultState = {
       currentData: false,
-      forecast: false,
+      dailyForecast: false,
       history: false,
-      hourly: false,
+      hourlyForecast: false,
       sunrise: false,
       sunset: false,
     }
@@ -39,13 +39,23 @@ class WeatherDetails extends Component {
     if (!USE_STUB) {
       axios.get(`https://api.wunderground.com/api/${API_KEY}/conditions/almanac/forecast/hourly/astronomy/q/${location}.json`)
         .then(response => {
+          const {
+            almanac: history,
+            current_observation: currentData,
+            forecast,
+            hourly_forecast: hourlyForecast,
+            sun_phase: sunPhase,
+          } = response.data
+          const { sunrise, sunset } = sunPhase
+          const { forecastday: dailyForecast } = forecast.simpleforecast
+
           this.setState({
-            currentData: response.data.current_observation,
-            forecast: response.data.forecast.simpleforecast.forecastday,
-            history: response.data.almanac,
-            hourly: response.data.hourly_forecast,
-            sunrise: `${response.data.sun_phase.sunrise.hour}:${response.data.sun_phase.sunrise.minute}`,
-            sunset: `${response.data.sun_phase.sunset.hour}:${response.data.sun_phase.sunset.minute}`,
+            currentData,
+            dailyForecast,
+            history,
+            hourlyForecast,
+            sunrise: `${sunrise.hour}:${sunrise.minute}`,
+            sunset: `${sunset.hour}:${sunset.minute}`,
           })
         })
 
@@ -53,13 +63,14 @@ class WeatherDetails extends Component {
   }
 
   render () {
-    const { currentData, forecast, history, hourly, sunrise, sunset } = this.state
+    const { currentData, dailyForecast, history, hourlyForecast, sunrise, sunset } = this.state
 
-    if (!currentData || !forecast || !history || !hourly || !sunrise || !sunset) return <Loading />
+    if (!currentData || !dailyForecast || !history || !hourlyForecast || !sunrise || !sunset) return <Loading />
 
     const { display_location: displayLocation, temp_f: temp, icon_url: iconUrl, weather } = currentData
     const { temp_high: tempHigh, temp_low: tempLow } = history
     const { city } = displayLocation
+    const todayForecast = dailyForecast[0]
 
     return (
       <View style={styles.container}>
@@ -67,7 +78,7 @@ class WeatherDetails extends Component {
 
         <CurrentConditions temp={temp} weather={weather} iconUrl={iconUrl} />
 
-        <TodayForecast low={forecast[0].low.fahrenheit} high={forecast[0].high.fahrenheit} />
+        <TodayForecast low={todayForecast.low.fahrenheit} high={todayForecast.high.fahrenheit} />
 
         <Records
           highTemp={tempHigh.record.F}
@@ -76,9 +87,9 @@ class WeatherDetails extends Component {
           lowYear={tempLow.recordyear}
         />
 
-        <HourlyForecast forecast={hourly} />
+        <HourlyForecast forecast={hourlyForecast} />
 
-        <DailyForecast forecast={forecast} />
+        <DailyForecast forecast={dailyForecast} />
       </View>
     )
   }

@@ -19,7 +19,7 @@ export const stubbedState = {
       recordyear: '1921',
     },
   },
-  hourly: [
+  hourlyForecast: [
     {
       FCTTIME: {
         hour: '13',
@@ -417,7 +417,7 @@ export const stubbedState = {
       pop: '56',
     },
   ],
-  forecast: [
+  dailyForecast: [
     {
       date: {
         weekday: 'Monday',
