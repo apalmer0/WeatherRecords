@@ -30,7 +30,7 @@ export class HomeScreen extends Component {
 }
 
 HomeScreen.navigationOptions = {
-  title: 'Cities'
+  title: 'Cities',
 }
 
 export default HomeScreen

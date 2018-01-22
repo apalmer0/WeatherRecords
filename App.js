@@ -1,8 +1,8 @@
 import { StackNavigator } from 'react-navigation'
 
-import HomeScreen from './src/app/screens/HomeScreen'
-import SplashScreen from './src/app/screens/SplashScreen'
-import WeatherDetails from './src/app/components/WeatherDetails'
+import HomeScreen from './src/screens/HomeScreen'
+import SplashScreen from './src/screens/SplashScreen'
+import WeatherDetails from './src/components/WeatherDetails'
 
 const fade = props => {
   const { position } = props
