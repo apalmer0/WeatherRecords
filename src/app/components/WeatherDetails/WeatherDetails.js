@@ -5,8 +5,7 @@ import axios from 'axios'
 import styles from './styles'
 
 const API_KEY = 'e6ceaca079a9b34e'
-const LOCATION = 'MA/Boston'
-const USE_STUB = false
+const USE_STUB = true
 
 class WeatherDetails extends Component {
   constructor (props) {
@@ -44,10 +43,14 @@ class WeatherDetails extends Component {
   }
 
   componentDidMount () {
-    axios.get(`https://api.wunderground.com/api/${API_KEY}/conditions/q/${LOCATION}.json`)
-      .then(response => this.setState({ weather: response.data.current_observation }))
-    axios.get(`https://api.wunderground.com/api/${API_KEY}/almanac/q/${LOCATION}.json`)
-      .then(response => this.setState({ history: response.data.almanac }))
+    const { city, state } = this.props.navigation.state.params
+    const location = `${state}/${city}`
+    if (!USE_STUB) {
+      axios.get(`https://api.wunderground.com/api/${API_KEY}/conditions/q/${location}.json`)
+        .then(response => this.setState({ weather: response.data.current_observation }))
+      axios.get(`https://api.wunderground.com/api/${API_KEY}/almanac/q/${location}.json`)
+        .then(response => this.setState({ history: response.data.almanac }))
+    }
   }
 
   render () {

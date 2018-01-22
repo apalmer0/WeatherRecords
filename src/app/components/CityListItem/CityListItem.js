@@ -7,15 +7,17 @@ class CityListItem extends Component {
   onPress = () => true
 
   render () {
-    const { city, navigate } = this.props
+    const { location, navigate } = this.props
+    const city = location.split(', ')[0]
+    const state = location.split(', ')[1]
 
     return (
       <View style={styles.containerx}>
         <TouchableOpacity
           style={styles.listItem}
-          onPress={() => navigate('Weather')}
+          onPress={() => navigate('Weather', { city, state })}
         >
-          <Text style={styles.cityName}>{city}</Text>
+          <Text style={styles.cityName}>{location}</Text>
         </TouchableOpacity>
       </View>
     )

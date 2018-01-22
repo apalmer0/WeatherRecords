@@ -6,7 +6,7 @@ import styles from './styles'
 
 export class HomeScreen extends Component {
   state = {
-    cities: [
+    locations: [
       'Boston, MA',
       'Midlothian, VA',
       'Hanover, NH',
@@ -16,12 +16,12 @@ export class HomeScreen extends Component {
   }
   render () {
     const { navigate } = this.props.navigation
-    const { cities } = this.state
+    const { locations } = this.state
 
     return (
       <ScrollView style={styles.container}>
-        {cities.map((city, index) => (
-            <CityListItem navigate={navigate} city={city} key={index} />
+        {locations.map((location, index) => (
+            <CityListItem navigate={navigate} location={location} key={index} />
           )
         )}
       </ScrollView>
