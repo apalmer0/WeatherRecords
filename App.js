@@ -2,6 +2,7 @@ import { StackNavigator } from 'react-navigation'
 
 import HomeScreen from './src/app/screens/HomeScreen'
 import SplashScreen from './src/app/screens/SplashScreen'
+import WeatherDetails from './src/app/components/WeatherDetails'
 
 const fade = props => {
   const { position } = props
@@ -22,10 +23,10 @@ const App = StackNavigator(
   {
     Home: { screen: HomeScreen },
     Splash: { screen: SplashScreen },
+    Weather: { screen: WeatherDetails },
   },
   {
     initialRouteName: 'Splash',
-    headerMode: 'none',
     transitionConfig: () => ({
       screenInterpolator: props => fade(props),
     }),
