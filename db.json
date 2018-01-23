@@ -1,0 +1,32 @@
+{
+  "locations": [
+    {
+      "name": "Midlothian, VA",
+      "id": 0
+    },
+    {
+      "name": "Hanover, NH",
+      "id": 1
+    },
+    {
+      "name": "Boulder, CO",
+      "id": 2
+    },
+    {
+      "name": "Seattle, WA",
+      "id": 3
+    },
+    {
+      "name": "San Francisco, CA",
+      "id": 4
+    },
+    {
+      "name": "Boston, MA",
+      "id": 5
+    },
+    {
+      "name": "Richmond, VA",
+      "id": 6
+    }
+  ]
+}
