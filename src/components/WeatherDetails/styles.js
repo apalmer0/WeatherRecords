@@ -14,9 +14,9 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
-    paddingBottom: 50,
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingTop: 20,
+    paddingBottom: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 10,
   },
 })

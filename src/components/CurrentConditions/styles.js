@@ -17,7 +17,7 @@ export default StyleSheet.create({
   tempStyles: {
     color: TEXT_COLOR,
     flex: 0.6,
-    fontSize: 100,
+    fontSize: 80,
   },
   weatherStyles: {
     color: TEXT_COLOR,
