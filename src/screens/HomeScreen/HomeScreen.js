@@ -32,12 +32,12 @@ export class HomeScreen extends Component {
 
     return (
       <ScrollView style={styles.container}>
-        {locations.map((location, index) => {
+        {locations.map((location) => {
           const { id, name } = location
 
           return  (
               <CityListItem
-                key={index}
+                key={id}
                 id={id}
                 location={name}
                 navigate={navigate}

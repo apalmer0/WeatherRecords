@@ -21,12 +21,18 @@ const fade = props => {
 
 const App = StackNavigator(
   {
-    Home: { screen: HomeScreen },
+    Home: {
+      screen: HomeScreen,
+      navigationOptions: {
+        gesturesEnabled: false
+      },
+    },
     Splash: { screen: SplashScreen },
     Weather: { screen: WeatherDetails },
   },
   {
     initialRouteName: 'Splash',
+    headerMode: 'none',
     transitionConfig: () => ({
       screenInterpolator: props => fade(props),
     }),
