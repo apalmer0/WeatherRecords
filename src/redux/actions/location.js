@@ -1,9 +1,11 @@
 import axios from 'axios'
 
-import { ADD_LOCATION, FETCH_LOCATIONS } from '../actionTypes'
+import { ADD_LOCATION, DELETE_LOCATION, FETCH_LOCATIONS } from '../actionTypes'
+
+const URL = '192.168.50.84'
 
 export const addLocation = (name) => (
-  dispatch => axios.post('http://192.168.1.155:3000/locations', { name })
+  dispatch => axios.post(`http://${URL}:3000/locations`, { name })
     .then(response => {
       dispatch({
         type: ADD_LOCATION,
@@ -12,8 +14,18 @@ export const addLocation = (name) => (
     })
 )
 
+export const deleteLocation = (locationId) => (
+  dispatch => axios.delete(`http://${URL}:3000/locations/${locationId}`)
+    .then(() => {
+      dispatch({
+        type: DELETE_LOCATION,
+        payload: locationId,
+      })
+    })
+)
+
 export const fetchLocations = () => (
-  dispatch => axios.get('http://192.168.1.155:3000/locations')
+  dispatch => axios.get(`http://${URL}:3000/locations`)
     .then(response => {
       dispatch({
         type: FETCH_LOCATIONS,
@@ -24,5 +36,6 @@ export const fetchLocations = () => (
 
 export default {
   addLocation,
+  deleteLocation,
   fetchLocations,
 }
