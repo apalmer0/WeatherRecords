@@ -11,6 +11,7 @@ export class DailyForecast extends Component {
       forecastContainer,
       forecastDay,
       forecastDayIcon,
+      forecastIconContainer,
       forecastTemp,
       forecastTemps,
     } = styles
@@ -24,10 +25,10 @@ export class DailyForecast extends Component {
 
           return (
             <Row key={index} style={forecastContainer}>
-              <Col size={3}>
+              <Col size={2}>
                 <Text style={forecastDay}>{weekday}</Text>
               </Col>
-              <Col size={2}>
+              <Col size={2} style={forecastIconContainer}>
                 <Image style={forecastDayIcon} source={src} />
               </Col>
               <Col size={1} style={forecastTemps}>

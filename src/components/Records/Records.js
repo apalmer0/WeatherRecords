@@ -5,8 +5,16 @@ import styles from './styles'
 
 export class Records extends Component {
   render () {
-    const { highTemp, highYear, lowTemp, lowYear } = this.props
     const {
+      highTemp,
+      highYear,
+      lowTemp,
+      lowYear,
+      normalHigh,
+      normalLow,
+    } = this.props
+    const {
+      normalRange,
       recordContainer,
       recordHeader,
       records,
@@ -18,6 +26,7 @@ export class Records extends Component {
     return (
       <View>
         <Text style={recordTitle}>Record low and high today:</Text>
+        <Text style={normalRange}>NORMAL: {normalLow}° - {normalHigh}°</Text>
         <View style={records}>
           <View style={recordContainer}>
             <Text style={recordHeader}>Low:</Text>

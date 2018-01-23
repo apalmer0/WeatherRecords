@@ -37,7 +37,9 @@ class WeatherDetails extends Component {
     const { city, state } = this.props.navigation.state.params
     const location = `${state}/${city}`
     if (!USE_STUB) {
-      axios.get(`https://api.wunderground.com/api/${API_KEY}/conditions/almanac/forecast/hourly/astronomy/q/${location}.json`)
+      axios.get(`https://api.wunderground.com/api/${API_KEY}/conditions/almanac/forecast/hourly/astronomy/q/${location}.json`, {
+        timeout: 2000,
+      })
         .then(response => {
           const {
             almanac: history,
@@ -85,6 +87,8 @@ class WeatherDetails extends Component {
           highYear={tempHigh.recordyear}
           lowTemp={tempLow.record.F}
           lowYear={tempLow.recordyear}
+          normalHigh={tempHigh.normal.F}
+          normalLow={tempLow.normal.F}
         />
 
         <HourlyForecast forecast={hourlyForecast} />

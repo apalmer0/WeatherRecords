@@ -20,4 +20,7 @@ export default StyleSheet.create({
     color: TEXT_COLOR,
     textAlign: 'center',
   },
+  forecastIconContainer: {
+    alignItems: 'center'
+  }
 })

@@ -1,10 +1,6 @@
 {
   "locations": [
     {
-      "name": "Midlothian, VA",
-      "id": 0
-    },
-    {
       "name": "Hanover, NH",
       "id": 1
     },
@@ -43,6 +39,10 @@
     {
       "name": "Miami, FL",
       "id": 10
+    },
+    {
+      "name": "Midlothian, VA",
+      "id": 11
     }
   ]
 }

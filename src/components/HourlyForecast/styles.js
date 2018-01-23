@@ -8,7 +8,7 @@ export default StyleSheet.create({
     borderBottomWidth: 1,
     marginTop: 20,
     marginBottom: 20,
-    paddingTop: 20,
-    paddingBottom: 20,
+    paddingTop: 5,
+    paddingBottom: 5,
   },
 })
