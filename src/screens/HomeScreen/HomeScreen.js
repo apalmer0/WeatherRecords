@@ -1,23 +1,20 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+import { connect } from 'react-redux'
 import { Button, ScrollView } from 'react-native'
 
 import AddLocationModal from '../../components/AddLocationModal'
 import CityListItem from '../../components/CityListItem'
 import Loading from '../../components/Loading'
+import { fetchLocations } from '../../redux/actions/location'
 import styles from './styles'
 
 export class HomeScreen extends Component {
   state = {
-    locations: [],
     showModal: false,
   }
 
   componentDidMount () {
-    axios.get('http://localhost:3000/locations')
-      .then(response => (
-        this.setState({ locations: response.data })
-      ))
+    this.props.getLocations()
   }
 
   toggleModal = () => {
@@ -27,10 +24,11 @@ export class HomeScreen extends Component {
   }
 
   render () {
-    const { navigate } = this.props.navigation
-    const { locations, showModal } = this.state
+    const { locations, navigation } = this.props
+    const { navigate } = navigation
+    const { showModal } = this.state
 
-    if (!locations) return <Loading />
+    if (!locations.length) return <Loading />
 
     return (
       <ScrollView style={styles.container}>
@@ -52,4 +50,14 @@ HomeScreen.navigationOptions = {
   title: 'Locations',
 }
 
-export default HomeScreen
+const mapStateToProps = (state) => ({
+  locations: state.locations,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  getLocations() {
+    return dispatch(fetchLocations())
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)

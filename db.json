@@ -27,6 +27,22 @@
     {
       "name": "Richmond, VA",
       "id": 6
+    },
+    {
+      "name": "Austin, TX",
+      "id": 7
+    },
+    {
+      "name": "Boothbay Harbor, ME",
+      "id": 8
+    },
+    {
+      "name": "Portland, OR",
+      "id": 9
+    },
+    {
+      "name": "Miami, FL",
+      "id": 10
     }
   ]
 }

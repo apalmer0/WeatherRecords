@@ -1,4 +1,14 @@
+import React from 'react'
 import { AppRegistry } from 'react-native';
-import App from './App';
+import { Provider } from 'react-redux'
 
-AppRegistry.registerComponent('WeatherRecords', () => App);
+import App from './App';
+import { store } from './src/redux/store'
+
+const ReduxApp = () => (
+  <Provider store={store}>
+    <App />
+  </Provider>
+)
+
+AppRegistry.registerComponent('WeatherRecords', () => ReduxApp);

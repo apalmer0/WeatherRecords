@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Modal, Text, TouchableOpacity, TextInput, View } from 'react-native'
-import axios from 'axios'
 
 import styles from './styles'
+import { addLocation } from '../../redux/actions/location'
 
 export class AddLocationModal extends Component {
   state = { location: '' }
@@ -12,12 +13,12 @@ export class AddLocationModal extends Component {
   }
 
   submitLocation = () => {
-    axios.post('http://localhost:3000/locations', {
-      name: this.state.location
-    })
+    const { createLocation, toggleModal } = this.props
+
+    createLocation(this.state.location)
       .then(() => {
         this.setState({ location: '' })
-        this.props.toggleModal()
+        toggleModal()
       })
   }
 
@@ -55,4 +56,10 @@ export class AddLocationModal extends Component {
   }
 }
 
-export default AddLocationModal
+const mapDispatchToProps = (dispatch) => ({
+  createLocation(name) {
+    return dispatch(addLocation(name))
+  }
+})
+
+export default connect(null, mapDispatchToProps)(AddLocationModal)
