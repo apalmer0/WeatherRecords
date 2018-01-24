@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import { ADD_LOCATION, DELETE_LOCATION, FETCH_LOCATIONS } from '../actionTypes'
 
-const URL = '192.168.50.84'
+const URL = '192.168.1.155'
 
 export const addLocation = (name) => (
   dispatch => axios.post(`http://${URL}:3000/locations`, { name })

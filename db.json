@@ -9,10 +9,6 @@
       "id": 3
     },
     {
-      "name": "San Francisco, CA",
-      "id": 4
-    },
-    {
       "name": "Boston, MA",
       "id": 5
     },
@@ -27,6 +23,14 @@
     {
       "name": "Chattanooga, TN",
       "id": 11
+    },
+    {
+      "name": "Honolulu, HI",
+      "id": 12
+    },
+    {
+      "name": "Cambridge, MA",
+      "id": 13
     }
   ]
 }

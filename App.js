@@ -28,7 +28,12 @@ const App = StackNavigator(
       },
     },
     Splash: { screen: SplashScreen },
-    Weather: { screen: WeatherDetails },
+    Weather: {
+      screen: WeatherDetails,
+      navigationOptions: {
+        gesturesEnabled: true,
+      },
+    },
   },
   {
     initialRouteName: 'Splash',
