@@ -16,7 +16,6 @@ import styles from './styles'
 class CityListItem extends Component {
   state = {
     pan: new Animated.ValueXY(),
-    scale: new Animated.Value(1),
   }
 
   componentWillMount () {
@@ -25,12 +24,7 @@ class CityListItem extends Component {
       onStartShouldSetPanResponderCapture: () => false,
       onMoveShouldSetPanResponder: () => true,
       onMoveShouldSetPanResponderCapture: () => true,
-      onPanResponderGrant: () => {
-        Animated.spring(
-          this.state.scale,
-          { toValue: 1.01, friction: 3 }
-        ).start();
-      },
+      onPanResponderGrant: () => true,
       onPanResponderMove: (_, gestureState) => {
         if (gestureState.dx < 0 && gestureState.dx > -110) {
           this.state.pan.setValue({ x: gestureState.dx })
@@ -43,10 +37,6 @@ class CityListItem extends Component {
         } else {
           this.state.pan.setValue({x: 0, y: 0});
         }
-        Animated.spring(
-          this.state.scale,
-          { toValue: 1, friction: 3 }
-        ).start();
       },
       onPanResponderTerminate: () => {
         this.state.pan.setValue({x: 0, y: 0});
@@ -79,10 +69,9 @@ class CityListItem extends Component {
     const { cityListContainer, cityListItem, cityName, deleteButton, deleteText, listItem } = styles
     const city = location.split(', ')[0]
     const state = location.split(', ')[1]
-    const { pan, scale } = this.state
+    const { pan } = this.state
     const translateX = pan.x
-    const rotate = '0deg'
-    const newStyle = { transform: [{ translateX }, {rotate}, {scale}] }
+    const newStyle = { transform: [{ translateX }] }
     const firstElementStyle = Platform.OS === 'ios' && index === 0 ? { paddingTop: 40 } : {}
 
     return (
