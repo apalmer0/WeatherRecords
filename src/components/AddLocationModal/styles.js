@@ -1,37 +1,37 @@
 import { StyleSheet } from 'react-native'
 
+const TEXT_COLOR = '#a6a6a6'
+
 export default StyleSheet.create({
   modalContent: {
-    backgroundColor: '#5c5a5a',
+    backgroundColor: '#f0f0f0',
     flex: 1,
-    justifyContent: 'space-between',
     paddingBottom: '20%',
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingTop: '20%',
   },
   closeModalButton: {
     alignItems: 'center',
-    backgroundColor: '#330dae',
     borderRadius: 5,
     padding: 10,
+    position: 'absolute',
+    bottom: 0,
   },
   closeModalText: {
-    color: '#fff',
+    color: TEXT_COLOR,
+    textAlign: 'center',
   },
   headerText: {
-    fontSize: 30,
+    color: TEXT_COLOR,
+    fontSize: 20,
+    marginBottom: 20,
     textAlign: 'center',
-    color: '#fff',
   },
   form: {
     flexDirection: 'row',
   },
   inputField: {
-    flex: 0.7,
-    backgroundColor: '#a7a3a3',
-    borderRadius: 5,
-    color: '#fff',
+    flex: 0.8,
+    backgroundColor: '#fff',
+    color: TEXT_COLOR,
     paddingLeft: 10,
     paddingRight: 10,
     paddingTop: 10,
@@ -39,13 +39,26 @@ export default StyleSheet.create({
   },
   submitButton: {
     alignItems: 'center',
-    borderRadius: 3,
-    flex: 0.3,
-    height: 50,
+    flex: 0.2,
     justifyContent: 'center',
-    backgroundColor: '#27AE60',
   },
   submitButtonText: {
-    color: '#fff',
+    color: TEXT_COLOR,
+  },
+  searchForm: {
+    backgroundColor: '#d9d9d9',
+    marginBottom: 10,
+    paddingBottom: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: '10%',
+  },
+  resultContainer: {
+    paddingBottom: 10,
+    paddingLeft: 30,
+    paddingTop: 10,
+  },
+  resultText: {
+    color: '#999999'
   }
 })

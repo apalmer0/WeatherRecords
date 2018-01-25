@@ -4,6 +4,7 @@ import {
   Alert,
   Animated,
   PanResponder,
+  Platform,
   Text,
   TouchableHighlight,
   View,
@@ -74,7 +75,7 @@ class CityListItem extends Component {
   }
 
   render () {
-    const { location, navigate } = this.props
+    const { index, location, navigate } = this.props
     const { cityListContainer, cityListItem, cityName, deleteButton, deleteText, listItem } = styles
     const city = location.split(', ')[0]
     const state = location.split(', ')[1]
@@ -82,17 +83,18 @@ class CityListItem extends Component {
     const translateX = pan.x
     const rotate = '0deg'
     const newStyle = { transform: [{ translateX }, {rotate}, {scale}] }
+    const firstElementStyle = Platform.OS === 'ios' && index === 0 ? { paddingTop: 40 } : {}
 
     return (
       <View style={cityListContainer}>
-        <TouchableHighlight style={deleteButton} onPress={this.showAlert} underlayColor='#B61210'>
+        <TouchableHighlight style={[deleteButton, firstElementStyle]} onPress={this.showAlert} underlayColor='#B61210'>
           <Text style={deleteText}>Delete</Text>
         </TouchableHighlight>
         <Animated.View style={[cityListItem, newStyle]} {...this.panResponder.panHandlers}>
           <TouchableHighlight
-            style={listItem}
+            style={[listItem, firstElementStyle]}
             onPress={() => navigate('Weather', { city, state })}
-            underlayColor='#068F12'
+            underlayColor='#1a3e61'
           >
             <Text style={cityName}>{city}</Text>
           </TouchableHighlight>

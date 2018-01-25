@@ -24,8 +24,8 @@ export class HomeScreen extends Component {
 
     return (
       <ScrollView style={styles.container}>
-        {!!locations.length && locations.map((location) => (
-            <CityListItem key={location} location={location} navigate={navigate} />
+        {!!locations.length && locations.map((location, index) => (
+            <CityListItem key={location} location={location} navigate={navigate} index={index} />
           )
         )}
         <Button onPress={this.toggleModal} title='Add location' />

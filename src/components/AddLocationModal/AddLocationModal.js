@@ -5,6 +5,12 @@ import { Modal, Text, TouchableOpacity, TextInput, View } from 'react-native'
 import styles from './styles'
 import { addLocation } from '../../redux/actions/location'
 
+const options = [
+  'Boston, MA',
+  'Boston, VA',
+  'Bostonia, CA',
+]
+
 export class AddLocationModal extends Component {
   state = { location: '' }
 
@@ -31,17 +37,25 @@ export class AddLocationModal extends Component {
         onRequestClose={toggleModal}
       >
         <View style={styles.modalContent}>
-          <Text style={styles.headerText}>Add a new location:</Text>
-          <View style={styles.form}>
-            <TextInput
-              style={styles.inputField}
-              value={location}
-              onChangeText={this.updateField}
-            />
-            <TouchableOpacity style={styles.submitButton} onPress={this.submitLocation}>
-              <Text style={styles.submitButtonText}>submit</Text>
-            </TouchableOpacity>
+          <View style={styles.searchForm}>
+            <Text style={styles.headerText}>Enter a city and state:</Text>
+            <View style={styles.form}>
+              <TextInput
+                style={styles.inputField}
+                value={location}
+                onChangeText={this.updateField}
+              />
+              <TouchableOpacity style={styles.submitButton} onPress={this.submitLocation}>
+                <Text style={styles.submitButtonText}>submit</Text>
+              </TouchableOpacity>
+            </View>
           </View>
+          {options.map((option) => (
+            <View style={styles.resultContainer} key={option}>
+              <Text style={styles.resultText}>{option}</Text>
+            </View>
+            ))
+          }
           <TouchableOpacity
             onPress={toggleModal}
             style={styles.closeModalButton}
