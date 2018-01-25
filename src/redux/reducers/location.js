@@ -1,4 +1,4 @@
-import { ADD_LOCATION, DELETE_LOCATION, FETCH_LOCATIONS } from '../actionTypes'
+import { ADD_LOCATION, DELETE_LOCATION } from '../actionTypes'
 
 const initialState = []
 
@@ -10,9 +10,7 @@ const locationReducer = (state = initialState, action) => {
         action.payload,
       ];
     case DELETE_LOCATION:
-      return state.filter(location => location.id !== action.payload);
-    case FETCH_LOCATIONS:
-      return action.payload;
+      return state.filter(location => location !== action.payload);
     default:
       return state;
   }

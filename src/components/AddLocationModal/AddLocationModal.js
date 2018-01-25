@@ -16,10 +16,8 @@ export class AddLocationModal extends Component {
     const { createLocation, toggleModal } = this.props
 
     createLocation(this.state.location)
-      .then(() => {
-        this.setState({ location: '' })
-        toggleModal()
-      })
+    this.setState({ location: '' })
+    toggleModal()
   }
 
   render () {
@@ -57,9 +55,7 @@ export class AddLocationModal extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  createLocation(name) {
-    return dispatch(addLocation(name))
-  }
+  createLocation: name => dispatch(addLocation(name))
 })
 
 export default connect(null, mapDispatchToProps)(AddLocationModal)

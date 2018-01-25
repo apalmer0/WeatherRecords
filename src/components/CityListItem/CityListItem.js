@@ -6,7 +6,6 @@ import {
   PanResponder,
   Text,
   TouchableHighlight,
-  TouchableOpacity,
   View,
 } from 'react-native'
 
@@ -56,9 +55,9 @@ class CityListItem extends Component {
   }
 
   deleteLocation = () => {
-    const { clearLocation, id } = this.props
+    const { clearLocation, location } = this.props
 
-    clearLocation(id)
+    clearLocation(location)
   }
 
   showAlert = () => {
@@ -104,9 +103,7 @@ class CityListItem extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  clearLocation(id) {
-    return dispatch(deleteLocation(id))
-  }
+  clearLocation: location => dispatch(deleteLocation(location))
 })
 
 export default connect(null, mapDispatchToProps)(CityListItem)

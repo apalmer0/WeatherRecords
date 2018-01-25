@@ -4,17 +4,11 @@ import { Button, ScrollView } from 'react-native'
 
 import AddLocationModal from '../../components/AddLocationModal'
 import CityListItem from '../../components/CityListItem'
-import Loading from '../../components/Loading'
-import { fetchLocations } from '../../redux/actions/location'
 import styles from './styles'
 
 export class HomeScreen extends Component {
   state = {
     showModal: false,
-  }
-
-  componentDidMount () {
-    this.props.getLocations()
   }
 
   toggleModal = () => {
@@ -28,22 +22,11 @@ export class HomeScreen extends Component {
     const { navigate } = navigation
     const { showModal } = this.state
 
-    if (!locations.length) return <Loading />
-
     return (
       <ScrollView style={styles.container}>
-        {locations.map((location) => {
-          const { id, name } = location
-
-          return  (
-              <CityListItem
-                key={id}
-                id={id}
-                location={name}
-                navigate={navigate}
-              />
-            )
-          }
+        {!!locations.length && locations.map((location) => (
+            <CityListItem key={location} location={location} navigate={navigate} />
+          )
         )}
         <Button onPress={this.toggleModal} title='Add location' />
         <AddLocationModal
@@ -59,14 +42,10 @@ HomeScreen.navigationOptions = {
   title: 'Locations',
 }
 
-const mapStateToProps = (state) => ({
-  locations: state.locations,
-})
+const mapStateToProps = (state) => {
+  const { locations } = state
 
-const mapDispatchToProps = (dispatch) => ({
-  getLocations() {
-    return dispatch(fetchLocations())
-  }
-})
+  return { locations }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)
+export default connect(mapStateToProps)(HomeScreen)
