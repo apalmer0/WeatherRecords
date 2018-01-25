@@ -5,8 +5,8 @@ const TEXT_COLOR = '#EBECEE'
 
 export default StyleSheet.create({
   city: {
-    fontSize: 40,
     color: TEXT_COLOR,
+    fontSize: 40,
     textAlign: 'center',
   },
   container: {

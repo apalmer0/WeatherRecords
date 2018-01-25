@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Platform, Text, View } from 'react-native'
 import axios from 'axios'
 
 import CurrentConditions from '../CurrentConditions'
@@ -73,10 +73,11 @@ class WeatherDetails extends Component {
     const { temp_high: tempHigh, temp_low: tempLow } = history
     const { city } = displayLocation
     const todayForecast = dailyForecast[0]
+    const iosStyles = Platform.OS === 'ios' ? { paddingTop: 30 } : {}
 
     return (
       <View style={styles.container}>
-        <Text style={styles.city}>{city}</Text>
+        <Text style={[styles.city, iosStyles]}>{city}</Text>
 
         <CurrentConditions temp={temp} weather={weather} iconUrl={iconUrl} />
 

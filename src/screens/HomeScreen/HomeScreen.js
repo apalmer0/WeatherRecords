@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Button, ScrollView } from 'react-native'
+import { Button, ScrollView, Text, View } from 'react-native'
 
 import AddLocationModal from '../../components/AddLocationModal'
 import CityListItem from '../../components/CityListItem'
@@ -28,6 +28,11 @@ export class HomeScreen extends Component {
             <CityListItem key={location} location={location} navigate={navigate} index={index} />
           )
         )}
+        {!locations.length &&
+          <View style={styles.noLocations}>
+            <Text style={styles.noLocationText}>No locations found</Text>
+          </View>
+        }
         <Button onPress={this.toggleModal} title='Add location' />
         <AddLocationModal
           visible={showModal}
