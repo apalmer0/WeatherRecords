@@ -1,4 +1,5 @@
 import axios from 'axios'
+import moment from 'moment'
 
 import { ADD_LOCATION, DELETE_LOCATION, FETCH_LOCATION_DATA } from '../actionTypes'
 
@@ -12,7 +13,8 @@ export const addLocation = (name) => (
     if (!locationExists) {
       const payload = {
         name,
-        data: {}
+        data: {},
+        lastUpdated: '',
       }
 
       dispatch({ type: ADD_LOCATION, payload })
@@ -28,11 +30,16 @@ export const deleteLocation = locationName => ({
 export const getLocationData = (location) => {
   const city = location.split(', ')[0]
   const state = location.split(', ')[1]
+  const now = moment().format('MM/DD/YY:ha')
 
-  return dispatch => (
-    axios.get(`https://api.wunderground.com/api/${WEATHER_UNDERGROUND_API_KEY}/conditions/almanac/forecast/hourly/astronomy/q/${state}/${city}.json`, {
-      timeout: 5000,
-    })
+  return (dispatch, getState) => {
+    const { locations } = getState()
+    const givenLocation = locations.find(({ name }) => name === location)
+
+    if (givenLocation.lastUpdated !== now) {
+      return axios.get(`https://api.wunderground.com/api/${WEATHER_UNDERGROUND_API_KEY}/conditions/almanac/forecast/hourly/astronomy/q/${state}/${city}.json`, {
+        timeout: 5000,
+      })
       .then(response => {
         const {
           almanac: history,
@@ -44,7 +51,6 @@ export const getLocationData = (location) => {
         const { sunrise, sunset } = sunPhase
         const { forecastday: dailyForecast } = forecast.simpleforecast
         const payload = {
-          name: location,
           data: {
             currentData,
             dailyForecast,
@@ -52,7 +58,9 @@ export const getLocationData = (location) => {
             hourlyForecast,
             sunrise: `${sunrise.hour}:${sunrise.minute}`,
             sunset: `${sunset.hour}:${sunset.minute}`,
-          }
+          },
+          lastUpdated: now,
+          name: location,
         }
 
         dispatch({
@@ -60,7 +68,8 @@ export const getLocationData = (location) => {
           payload,
         })
       })
-  )
+    }
+  }
 }
 
 export default {
