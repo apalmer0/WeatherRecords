@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native'
 
-const BACKGROUND_COLOR = '#3C4566'
+export const BKGD_DAY = '#0D64A7'
+export const BKGD_NIGHT = '#010026'
 const TEXT_COLOR = '#EBECEE'
 
 export default StyleSheet.create({
@@ -15,7 +16,6 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
   container: {
-    backgroundColor: BACKGROUND_COLOR,
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',

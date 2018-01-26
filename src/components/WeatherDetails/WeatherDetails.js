@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import Icon from 'react-native-vector-icons/Entypo'
+import moment from 'moment'
 import { connect } from 'react-redux'
-import Icon from 'react-native-vector-icons/Entypo';
 import { find } from 'lodash'
 import { Platform, Text, View } from 'react-native'
 
@@ -9,12 +10,13 @@ import DailyForecast from '../DailyForecast'
 import HourlyForecast from '../HourlyForecast'
 import Loading from '../Loading'
 import Records from '../Records'
-import styles from './styles'
+import styles, { BKGD_DAY, BKGD_NIGHT } from './styles'
 import TodayForecast from '../TodayForecast'
 import { stubbedState } from './helpers'
 import { getLocationData } from '../../redux/actions/location'
 
 const USE_STUB = true
+const TIME_FORMAT = 'HH:mm'
 
 class WeatherDetails extends Component {
   state = stubbedState
@@ -30,6 +32,7 @@ class WeatherDetails extends Component {
 
   render () {
     const source = USE_STUB ? this.state : this.props.locationData
+    const { navigate } = this.props.navigation
     const { currentData, dailyForecast, history, hourlyForecast, sunrise, sunset } = source
 
     if (!currentData || !dailyForecast || !history || !hourlyForecast || !sunrise || !sunset) return <Loading />
@@ -40,8 +43,15 @@ class WeatherDetails extends Component {
     const todayForecast = dailyForecast[0]
     const iosStyles = Platform.OS === 'ios' ? { paddingTop: 30 } : {}
 
+    const now = moment()
+    const parsedSunrise = moment(sunrise, TIME_FORMAT)
+    const parsedSunset = moment(sunset, TIME_FORMAT)
+    const isDay = now.isAfter(parsedSunrise) && now.isBefore(parsedSunset)
+    const backgroundColor = isDay ? BKGD_DAY : BKGD_NIGHT
+    const backgroundStyle = { backgroundColor }
+
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, backgroundStyle]}>
         <Text style={[styles.city, iosStyles]}>{city}</Text>
 
         <CurrentConditions temp={temp} weather={weather} iconUrl={iconUrl} />
@@ -63,10 +73,10 @@ class WeatherDetails extends Component {
 
         <View style={styles.bottomMenu}>
           <Icon.Button
-            backgroundColor='#3C4566'
+            backgroundColor={backgroundColor}
             color='#EBECEE'
             name="back"
-            onPress={() => this.props.navigation.navigate('Home')}
+            onPress={() => navigate('Home')}
             padding={0}
             size={30}
           />
