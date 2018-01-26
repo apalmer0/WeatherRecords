@@ -67,8 +67,6 @@ class CityListItem extends Component {
   render () {
     const { index, location, navigate } = this.props
     const { cityListContainer, cityListItem, cityName, deleteButton, deleteText, listItem } = styles
-    const city = location.split(', ')[0]
-    const state = location.split(', ')[1]
     const { pan } = this.state
     const translateX = pan.x
     const newStyle = { transform: [{ translateX }] }
@@ -82,10 +80,10 @@ class CityListItem extends Component {
         <Animated.View style={[cityListItem, newStyle]} {...this.panResponder.panHandlers}>
           <TouchableHighlight
             style={[listItem, firstElementStyle]}
-            onPress={() => navigate('Weather', { city, state })}
+            onPress={() => navigate('Weather', { location })}
             underlayColor='#1a3e61'
           >
-            <Text style={cityName}>{city}</Text>
+            <Text style={cityName}>{location}</Text>
           </TouchableHighlight>
         </Animated.View>
       </View>

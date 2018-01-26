@@ -7,9 +7,7 @@ import CityListItem from '../../components/CityListItem'
 import styles from './styles'
 
 export class HomeScreen extends Component {
-  state = {
-    showModal: false,
-  }
+  state = { showModal: false }
 
   toggleModal = () => {
     const { showModal } = this.state
@@ -25,7 +23,7 @@ export class HomeScreen extends Component {
     return (
       <ScrollView style={styles.container}>
         {!!locations.length && locations.map((location, index) => (
-            <CityListItem key={location} location={location} navigate={navigate} index={index} />
+            <CityListItem key={location.name} location={location.name} navigate={navigate} index={index} />
           )
         )}
         {!locations.length &&
@@ -41,10 +39,6 @@ export class HomeScreen extends Component {
       </ScrollView>
     )
   }
-}
-
-HomeScreen.navigationOptions = {
-  title: 'Locations',
 }
 
 const mapStateToProps = (state) => {

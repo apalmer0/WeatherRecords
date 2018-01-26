@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/Entypo';
+import { find } from 'lodash'
 import { Platform, Text, View } from 'react-native'
 
 import CurrentConditions from '../CurrentConditions'
@@ -11,62 +12,25 @@ import Records from '../Records'
 import styles from './styles'
 import TodayForecast from '../TodayForecast'
 import { stubbedState } from './helpers'
+import { getLocationData } from '../../redux/actions/location'
 
-const API_KEY = 'e6ceaca079a9b34e'
 const USE_STUB = true
 
 class WeatherDetails extends Component {
-  constructor (props) {
-    super(props)
-    const defaultState = {
-      currentData: false,
-      dailyForecast: false,
-      history: false,
-      hourlyForecast: false,
-      sunrise: false,
-      sunset: false,
-    }
-
-    if (USE_STUB) {
-      this.state = stubbedState
-    } else {
-      this.state = defaultState
-    }
-  }
+  state = stubbedState
 
   componentDidMount () {
-    const { city, state } = this.props.navigation.state.params
-    const location = `${state}/${city}`
+    const { navigation, updateLocationData } = this.props
+    const { location } = navigation.state.params
+
     if (!USE_STUB) {
-      axios.get(`https://api.wunderground.com/api/${API_KEY}/conditions/almanac/forecast/hourly/astronomy/q/${location}.json`, {
-        timeout: 2000,
-      })
-        .then(response => {
-          const {
-            almanac: history,
-            current_observation: currentData,
-            forecast,
-            hourly_forecast: hourlyForecast,
-            sun_phase: sunPhase,
-          } = response.data
-          const { sunrise, sunset } = sunPhase
-          const { forecastday: dailyForecast } = forecast.simpleforecast
-
-          this.setState({
-            currentData,
-            dailyForecast,
-            history,
-            hourlyForecast,
-            sunrise: `${sunrise.hour}:${sunrise.minute}`,
-            sunset: `${sunset.hour}:${sunset.minute}`,
-          })
-        })
-
+      updateLocationData(location)
     }
   }
 
   render () {
-    const { currentData, dailyForecast, history, hourlyForecast, sunrise, sunset } = this.state
+    const source = USE_STUB ? this.state : this.props.locationData
+    const { currentData, dailyForecast, history, hourlyForecast, sunrise, sunset } = source
 
     if (!currentData || !dailyForecast || !history || !hourlyForecast || !sunrise || !sunset) return <Loading />
 
@@ -112,4 +76,17 @@ class WeatherDetails extends Component {
   }
 }
 
-export default WeatherDetails
+const mapStateToProps = (reduxState, ownProps) => {
+  const { location } = ownProps.navigation.state.params
+  const locationData = find(reduxState.locations, ({ name }) => name === location).data
+
+  return { locationData }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  updateLocationData: (location) => (
+    dispatch(getLocationData(location))
+  )
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(WeatherDetails)
