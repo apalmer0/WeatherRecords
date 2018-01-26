@@ -4,6 +4,11 @@ const BACKGROUND_COLOR = '#3C4566'
 const TEXT_COLOR = '#EBECEE'
 
 export default StyleSheet.create({
+  bottomMenu: {
+    alignItems: 'flex-end',
+    borderTopColor: '#C7CACD',
+    borderTopWidth: 1,
+  },
   city: {
     color: TEXT_COLOR,
     fontSize: 40,

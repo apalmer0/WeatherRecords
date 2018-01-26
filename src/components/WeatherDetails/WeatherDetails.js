@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Platform, Text, View } from 'react-native'
 import axios from 'axios'
+import Icon from 'react-native-vector-icons/Entypo';
+import { Platform, Text, View } from 'react-native'
 
 import CurrentConditions from '../CurrentConditions'
 import DailyForecast from '../DailyForecast'
@@ -95,6 +96,17 @@ class WeatherDetails extends Component {
         <HourlyForecast forecast={hourlyForecast} />
 
         <DailyForecast forecast={dailyForecast} />
+
+        <View style={styles.bottomMenu}>
+          <Icon.Button
+            backgroundColor='#3C4566'
+            color='#EBECEE'
+            name="back"
+            onPress={() => this.props.navigation.navigate('Home')}
+            padding={0}
+            size={30}
+          />
+        </View>
       </View>
     )
   }
