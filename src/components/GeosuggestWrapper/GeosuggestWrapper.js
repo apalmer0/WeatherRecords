@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { difference, find } from 'lodash'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
+import { GOOGLE_MAPS_API_KEY } from 'react-native-dotenv'
 
 import styles from './styles'
 import { addLocation } from '../../redux/actions/location'
-
-const GOOGLE_MAPS_API_KEY = 'AIzaSyCA07g4oXkGBi5XOUpkSvEFIEy9C0E_7z0'
 
 export class AddLocationModal extends Component {
   getLocationName = (addressComponents) => {

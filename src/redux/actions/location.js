@@ -1,9 +1,8 @@
 import axios from 'axios'
 import moment from 'moment'
+import { WEATHER_UNDERGROUND_API_KEY } from 'react-native-dotenv'
 
 import { ADD_LOCATION, DELETE_LOCATION, FETCH_LOCATION_DATA } from '../actionTypes'
-
-const WEATHER_UNDERGROUND_API_KEY = 'e6ceaca079a9b34e'
 
 export const addLocation = (name) => (
   (dispatch, getState) => {
