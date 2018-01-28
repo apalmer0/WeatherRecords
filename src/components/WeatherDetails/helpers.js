@@ -6,16 +6,29 @@ export const stubbedState = {
       city: 'Boston',
     },
     temp_f: 43.2,
+    temp_c: 5.2,
   },
   history: {
     temp_low: {
-      record: { F: 0 },
-      normal: { F: 40 },
+      record: {
+        C: -30,
+        F: 0,
+      },
+      normal: {
+        C: 5,
+        F: 40,
+      },
       recordyear: '1990',
     },
     temp_high: {
-      record: { F: 90 },
-      normal: { F: 50 },
+      record: {
+        C: 50,
+        F: 90,
+      },
+        normal: {
+        C: 30,
+        F: 50,
+      },
       recordyear: '1921',
     },
   },
@@ -27,6 +40,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -38,6 +52,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -49,6 +64,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -60,6 +76,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -71,6 +88,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -82,6 +100,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -93,6 +112,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -104,6 +124,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -115,6 +136,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -126,6 +148,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -137,6 +160,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -148,6 +172,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -159,6 +184,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -170,6 +196,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -181,6 +208,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -192,6 +220,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -203,6 +232,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -214,6 +244,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -225,6 +256,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -236,6 +268,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -247,6 +280,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -258,6 +292,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -269,6 +304,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -280,6 +316,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -291,6 +328,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -302,6 +340,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -313,6 +352,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -324,6 +364,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -335,6 +376,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -346,6 +388,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -357,6 +400,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -368,6 +412,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -379,6 +424,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -390,6 +436,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -401,6 +448,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -412,6 +460,7 @@ export const stubbedState = {
       },
       temp: {
         english: '37',
+        metric: '12',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/cloudy.gif',
       pop: '56',
@@ -424,9 +473,11 @@ export const stubbedState = {
       },
       high: {
         fahrenheit: '39',
+        celsius: '6',
       },
       low: {
         fahrenheit: '37',
+        celsius: '2',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/rain.gif',
       pop: 90,
@@ -437,9 +488,11 @@ export const stubbedState = {
       },
       high: {
         fahrenheit: '39',
+        celsius: '6',
       },
       low: {
         fahrenheit: '37',
+        celsius: '2',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/rain.gif',
       pop: 90,
@@ -450,9 +503,11 @@ export const stubbedState = {
       },
       high: {
         fahrenheit: '39',
+        celsius: '6',
       },
       low: {
         fahrenheit: '37',
+        celsius: '2',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/rain.gif',
       pop: 90,
@@ -463,9 +518,11 @@ export const stubbedState = {
       },
       high: {
         fahrenheit: '39',
+        celsius: '6',
       },
       low: {
         fahrenheit: '37',
+        celsius: '2',
       },
       icon_url: 'http://icons.wxug.com/i/c/k/rain.gif',
       pop: 90,

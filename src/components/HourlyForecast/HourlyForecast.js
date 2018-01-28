@@ -7,13 +7,14 @@ import styles from './styles'
 
 export class HourlyForecast extends Component {
   render () {
-    const { forecast } = this.props
+    const { forecast, isFahrenheit } = this.props
 
     return (
       <Grid style={styles.hourlyForecastContainer}>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {forecast.map((hour, index) => {
             const { FCTTIME, icon_url: iconUrl, temp, pop } = hour
+            const currentTemp = temp[isFahrenheit ? 'english' : 'metric']
 
             return (
               <HourlyForecastItem
@@ -22,7 +23,7 @@ export class HourlyForecast extends Component {
                 hour={FCTTIME.hour}
                 iconUrl={iconUrl}
                 key={index}
-                temp={temp.english}
+                temp={currentTemp}
               />
             )
           })}

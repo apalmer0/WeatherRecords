@@ -4,17 +4,20 @@ import storage from 'redux-persist/lib/storage'
 import thunk from 'redux-thunk'
 
 import locationReducer from './reducers/location'
+import scaleReducer from './reducers/scale'
 
 const persistConfig = {
   key: 'root',
   storage,
   whitelist: [
-    'locations'
+    'locations',
+    'scale',
   ],
 }
 
 const rootReducer = combineReducers({
   locations: locationReducer,
+  scale: scaleReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Icon from 'react-native-vector-icons/Entypo'
 import moment from 'moment'
 import { connect } from 'react-redux'
 import { find } from 'lodash'
@@ -7,13 +6,15 @@ import { Platform, Text, View } from 'react-native'
 
 import CurrentConditions from '../CurrentConditions'
 import DailyForecast from '../DailyForecast'
+import Footer from '../Footer'
 import HourlyForecast from '../HourlyForecast'
 import Loading from '../Loading'
 import Records from '../Records'
 import styles, { BKGD_DAY, BKGD_NIGHT } from './styles'
 import TodayForecast from '../TodayForecast'
-import { stubbedState } from './helpers'
+import { changeTemperatureScale } from '../../redux/actions/scale'
 import { getLocationData } from '../../redux/actions/location'
+import { stubbedState } from './helpers'
 
 const USE_STUB = true
 const TIME_FORMAT = 'HH:mm'
@@ -32,15 +33,19 @@ class WeatherDetails extends Component {
 
   render () {
     const source = USE_STUB ? this.state : this.props.locationData
-    const { navigate } = this.props.navigation
+    const { isFahrenheit, navigation, toggleTemperatureScale } = this.props
+    const { navigate } = navigation
     const { currentData, dailyForecast, history, hourlyForecast, sunrise, sunset } = source
 
     if (!currentData || !dailyForecast || !history || !hourlyForecast || !sunrise || !sunset) return <Loading />
 
-    const { display_location: displayLocation, temp_f: temp, icon_url: iconUrl, weather } = currentData
+    const { display_location: displayLocation, icon_url: iconUrl, weather } = currentData
+    const temp = currentData[isFahrenheit ? 'temp_f' : 'temp_c' ]
     const { temp_high: tempHigh, temp_low: tempLow } = history
     const { city } = displayLocation
     const todayForecast = dailyForecast[0]
+    const todayLow = todayForecast.low[isFahrenheit ? 'fahrenheit' : 'celsius']
+    const todayHigh = todayForecast.high[isFahrenheit ? 'fahrenheit' : 'celsius']
     const iosStyles = Platform.OS === 'ios' ? { paddingTop: 30 } : {}
 
     const now = moment()
@@ -49,6 +54,7 @@ class WeatherDetails extends Component {
     const isDay = now.isAfter(parsedSunrise) && now.isBefore(parsedSunset)
     const backgroundColor = isDay ? BKGD_DAY : BKGD_NIGHT
     const backgroundStyle = { backgroundColor }
+    const weatherFormat = isFahrenheit ? 'F' : 'C'
 
     return (
       <View style={[styles.container, backgroundStyle]}>
@@ -56,31 +62,27 @@ class WeatherDetails extends Component {
 
         <CurrentConditions temp={temp} weather={weather} iconUrl={iconUrl} />
 
-        <TodayForecast low={todayForecast.low.fahrenheit} high={todayForecast.high.fahrenheit} />
+        <TodayForecast low={todayLow} high={todayHigh} />
 
         <Records
-          highTemp={tempHigh.record.F}
+          highTemp={tempHigh.record[weatherFormat]}
           highYear={tempHigh.recordyear}
-          lowTemp={tempLow.record.F}
+          lowTemp={tempLow.record[weatherFormat]}
           lowYear={tempLow.recordyear}
-          normalHigh={tempHigh.normal.F}
-          normalLow={tempLow.normal.F}
+          normalHigh={tempHigh.normal[weatherFormat]}
+          normalLow={tempLow.normal[weatherFormat]}
         />
 
-        <HourlyForecast forecast={hourlyForecast} />
+        <HourlyForecast forecast={hourlyForecast} isFahrenheit={isFahrenheit} />
 
-        <DailyForecast forecast={dailyForecast} />
+        <DailyForecast forecast={dailyForecast} isFahrenheit={isFahrenheit} />
 
-        <View style={styles.bottomMenu}>
-          <Icon.Button
-            backgroundColor={backgroundColor}
-            color='#EBECEE'
-            name="back"
-            onPress={() => navigate('Home')}
-            padding={0}
-            size={30}
-          />
-        </View>
+        <Footer
+          backgroundColor={backgroundColor}
+          isFahrenheit={isFahrenheit}
+          navigate={navigate}
+          toggleTemperatureScale={toggleTemperatureScale}
+        />
       </View>
     )
   }
@@ -89,13 +91,20 @@ class WeatherDetails extends Component {
 const mapStateToProps = (reduxState, ownProps) => {
   const { location } = ownProps.navigation.state.params
   const locationData = find(reduxState.locations, ({ name }) => name === location).data
+  const { isFahrenheit } = reduxState.scale
 
-  return { locationData }
+  return {
+    isFahrenheit,
+    locationData,
+  }
 }
 
 const mapDispatchToProps = (dispatch) => ({
   updateLocationData: (location) => (
     dispatch(getLocationData(location))
+  ),
+  toggleTemperatureScale: () => (
+    dispatch(changeTemperatureScale)
   )
 })
 

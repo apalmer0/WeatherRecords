@@ -6,7 +6,7 @@ import styles from './styles'
 
 export class DailyForecast extends Component {
   render () {
-    const { forecast } = this.props
+    const { forecast, isFahrenheit } = this.props
     const {
       forecastContainer,
       forecastDay,
@@ -22,6 +22,8 @@ export class DailyForecast extends Component {
           const { date, high, icon_url: iconUrl, low } = day
           const { weekday } = date
           const src = { uri: iconUrl.replace('http', 'https')}
+          const lowTemp = low[isFahrenheit ? 'fahrenheit' : 'celsius']
+          const highTemp = high[isFahrenheit ? 'fahrenheit' : 'celsius']
 
           return (
             <Row key={index} style={forecastContainer}>
@@ -32,10 +34,10 @@ export class DailyForecast extends Component {
                 <Image style={forecastDayIcon} source={src} />
               </Col>
               <Col size={1} style={forecastTemps}>
-                <Text style={forecastTemp}>{low.fahrenheit}</Text>
+                <Text style={forecastTemp}>{lowTemp}</Text>
               </Col>
               <Col size={1} style={forecastTemps}>
-                <Text style={forecastTemp}>{high.fahrenheit}</Text>
+                <Text style={forecastTemp}>{highTemp}</Text>
               </Col>
             </Row>
           )
