@@ -9,6 +9,7 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native'
+import { find } from 'lodash'
 
 import { deleteLocation } from '../../redux/actions/location'
 import styles from './styles'
@@ -65,12 +66,22 @@ class CityListItem extends Component {
   }
 
   render () {
-    const { index, location, navigate } = this.props
-    const { cityListContainer, cityListItem, cityName, deleteButton, deleteText, listItem } = styles
+    const { currentTemp, index, location, navigate } = this.props
+    const {
+      cityListContainer,
+      cityListItem,
+      cityName,
+      currentTempStyles,
+      deleteButton,
+      deleteText,
+      listItem,
+      textContainer,
+    } = styles
     const { pan } = this.state
     const translateX = pan.x
     const newStyle = { transform: [{ translateX }] }
     const firstElementStyle = Platform.OS === 'ios' && index === 0 ? { paddingTop: 40 } : {}
+    const temp = currentTemp ? Math.round(currentTemp) : '-'
 
     return (
       <View style={cityListContainer}>
@@ -83,7 +94,10 @@ class CityListItem extends Component {
             onPress={() => navigate('Weather', { location })}
             underlayColor='#1a3e61'
           >
-            <Text style={cityName}>{location}</Text>
+            <View style={textContainer}>
+              <Text style={cityName}>{location}</Text>
+              <Text style={currentTempStyles}>{temp}°</Text>
+            </View>
           </TouchableHighlight>
         </Animated.View>
       </View>
@@ -91,8 +105,23 @@ class CityListItem extends Component {
   }
 }
 
+const mapStateToProps = (state, ownProps) => {
+  const { isFahrenheit } = state.scale
+  const weatherFormat = isFahrenheit ? 'temp_f' : 'temp_c'
+  const { location } = ownProps
+  const locationData = find(state.locations, ({ name }) => name === location).data
+  const { currentData } = locationData
+  let currentTemp
+
+  if (currentData) {
+    currentTemp = currentData[weatherFormat]
+  }
+
+  return { currentTemp }
+}
+
 const mapDispatchToProps = (dispatch) => ({
   clearLocation: location => dispatch(deleteLocation(location))
 })
 
-export default connect(null, mapDispatchToProps)(CityListItem)
+export default connect(mapStateToProps, mapDispatchToProps)(CityListItem)

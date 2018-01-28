@@ -12,6 +12,12 @@ export default StyleSheet.create({
     color: '#fff',
     fontSize: 30,
   },
+  currentTempStyles: {
+    color: '#fff',
+    fontSize: 30,
+    position: 'absolute',
+    right: 15,
+  },
   deleteButton: {
     backgroundColor: '#F51B18',
     borderBottomColor: '#B61210',
@@ -37,4 +43,7 @@ export default StyleSheet.create({
     paddingLeft: 10,
     paddingTop: 20,
   },
+  textContainer: {
+    flexDirection: 'row',
+  }
 })
