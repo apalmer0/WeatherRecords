@@ -7,7 +7,14 @@ import CityListItem from '../../components/CityListItem'
 import styles from './styles'
 
 export class HomeScreen extends Component {
-  state = { showModal: false }
+  state = {
+    activeItem: undefined,
+    showModal: false,
+  }
+
+  setActiveItem = (index) => (
+    this.setState({ activeItem: index })
+  )
 
   toggleModal = () => {
     const { showModal } = this.state
@@ -17,13 +24,20 @@ export class HomeScreen extends Component {
 
   render () {
     const { locations, navigation } = this.props
+    const { activeItem, showModal } = this.state
     const { navigate } = navigation
-    const { showModal } = this.state
 
     return (
       <ScrollView style={styles.container}>
         {!!locations.length && locations.map((location, index) => (
-            <CityListItem key={location.name} location={location.name} navigate={navigate} index={index} />
+            <CityListItem
+              activeItem={activeItem}
+              index={index}
+              key={location.name}
+              location={location.name}
+              navigate={navigate}
+              setActiveItem={this.setActiveItem}
+            />
           )
         )}
         {!locations.length &&

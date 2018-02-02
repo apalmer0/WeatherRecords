@@ -20,27 +20,30 @@ class CityListItem extends Component {
   }
 
   componentWillMount () {
+    const { index, setActiveItem } = this.props
+    const { pan } = this.state
+
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: () => false,
       onStartShouldSetPanResponderCapture: () => false,
       onMoveShouldSetPanResponder: () => true,
       onMoveShouldSetPanResponderCapture: () => true,
-      onPanResponderGrant: () => true,
+      onPanResponderGrant: () => setActiveItem(index),
       onPanResponderMove: (_, gestureState) => {
         if (gestureState.dx < 0 && gestureState.dx > -110) {
-          this.state.pan.setValue({ x: gestureState.dx })
+          pan.setValue({ x: gestureState.dx })
         }
       },
       onPanResponderTerminationRequest: () => true,
       onPanResponderRelease: (_, gestureState) => {
         if (gestureState.dx <= -100) {
-          this.state.pan.setValue({x: -100, y: 0});
+          pan.setValue({x: -100, y: 0});
         } else {
-          this.state.pan.setValue({x: 0, y: 0});
+          pan.setValue({x: 0, y: 0});
         }
       },
       onPanResponderTerminate: () => {
-        this.state.pan.setValue({x: 0, y: 0});
+        pan.setValue({x: 0, y: 0});
       },
       onShouldBlockNativeResponder: () => true,
     })
@@ -65,8 +68,15 @@ class CityListItem extends Component {
     )
   }
 
+  handlePress = () => {
+    const { activeItem, location, setActiveItem, navigate } = this.props
+    const noActiveItem = activeItem === undefined
+
+    return noActiveItem ? navigate('Weather', { location }) : setActiveItem(undefined)
+  }
+
   render () {
-    const { currentTemp, index, location, navigate } = this.props
+    const { activeItem, currentTemp, index, location } = this.props
     const {
       cityListContainer,
       cityListItem,
@@ -78,8 +88,9 @@ class CityListItem extends Component {
       textContainer,
     } = styles
     const { pan } = this.state
+    const active = activeItem === index
     const translateX = pan.x
-    const newStyle = { transform: [{ translateX }] }
+    const newStyle = active && { transform: [{ translateX }] }
     const firstElementStyle = Platform.OS === 'ios' && index === 0 ? { paddingTop: 40 } : {}
     const temp = currentTemp ? Math.round(currentTemp) : '-'
 
@@ -91,8 +102,8 @@ class CityListItem extends Component {
         <Animated.View style={[cityListItem, newStyle]} {...this.panResponder.panHandlers}>
           <TouchableHighlight
             style={[listItem, firstElementStyle]}
-            onPress={() => navigate('Weather', { location })}
-            underlayColor='#1a3e61'
+            onPress={this.handlePress}
+            underlayColor='#5086e0'
           >
             <View style={textContainer}>
               <Text style={cityName}>{location}</Text>
