@@ -16,7 +16,7 @@ import { changeTemperatureScale } from '../../redux/actions/scale'
 import { getLocationData } from '../../redux/actions/location'
 import { stubbedState } from './helpers'
 
-const USE_STUB = true
+const USE_STUB = false
 const TIME_FORMAT = 'HH:mm'
 
 class WeatherDetails extends Component {

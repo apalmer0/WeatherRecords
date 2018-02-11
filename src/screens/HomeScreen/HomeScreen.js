@@ -30,15 +30,14 @@ export class HomeScreen extends Component {
     return (
       <ScrollView style={styles.container}>
         {!!locations.length && locations.map((location, index) => (
-            <CityListItem
-              activeItem={activeItem}
-              index={index}
-              key={location.name}
-              location={location.name}
-              navigate={navigate}
-              setActiveItem={this.setActiveItem}
-            />
-          )
+          <CityListItem
+            activeItem={activeItem}
+            index={index}
+            key={location.name}
+            location={location.name}
+            navigate={navigate}
+            setActiveItem={this.setActiveItem}
+          />)
         )}
         {!locations.length &&
           <View style={styles.noLocations}>
