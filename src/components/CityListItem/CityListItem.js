@@ -24,10 +24,8 @@ class CityListItem extends Component {
     const { pan } = this.state
 
     this.panResponder = PanResponder.create({
-      onStartShouldSetPanResponder: () => false,
-      onStartShouldSetPanResponderCapture: () => false,
-      onMoveShouldSetPanResponder: () => true,
-      onMoveShouldSetPanResponderCapture: () => true,
+      onMoveShouldSetPanResponder: (_, gestureState) => gestureState.dx !== 0 && gestureState.dy !== 0,
+      onMoveShouldSetPanResponderCapture: () => false,
       onPanResponderGrant: () => setActiveItem(index),
       onPanResponderMove: (_, gestureState) => {
         if (gestureState.dx < 0 && gestureState.dx > -110) {
@@ -42,9 +40,7 @@ class CityListItem extends Component {
           pan.setValue({x: 0, y: 0});
         }
       },
-      onPanResponderTerminate: () => {
-        pan.setValue({x: 0, y: 0});
-      },
+      onPanResponderTerminate: () => pan.setValue({x: 0, y: 0}),
       onShouldBlockNativeResponder: () => true,
     })
   }
